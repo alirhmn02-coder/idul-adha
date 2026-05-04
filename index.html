@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Idul Adha Countdown</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    overflow: hidden;
+
+    /* Sunset gradient */
+    background: linear-gradient(
+        to top,
+        #1e2a38 0%,
+        #3a4a5f 30%,
+        #ffb36b 70%,
+        #ffd9a0 100%
+    );
+}
+
+/* Matahari */
+.sun {
+    position: absolute;
+    bottom: 120px;
+    left: 15%;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, #fff2c7, #ffb36b);
+    border-radius: 50%;
+    filter: blur(2px);
+}
+
+/* Bukit */
+.hill {
+    position: absolute;
+    bottom: 0;
+    width: 120%;
+    height: 250px;
+    background: #1b2b3a;
+    border-top-left-radius: 60% 100%;
+    border-top-right-radius: 60% 100%;
+}
+
+/* Bukit kedua */
+.hill2 {
+    position: absolute;
+    bottom: 80px;
+    width: 120%;
+    height: 200px;
+    background: #24394d;
+    border-top-left-radius: 60% 100%;
+    border-top-right-radius: 60% 100%;
+}
+
+/* Domba kiri */
+.sheep-left {
+    position: absolute;
+    bottom: 60px;
+    left: 80px;
+}
+
+.sheep-left .body {
+    width: 90px;
+    height: 55px;
+    background: #fff;
+    border-radius: 50px;
+}
+
+.sheep-left .head {
+    width: 35px;
+    height: 35px;
+    background: #333;
+    border-radius: 50%;
+    position: absolute;
+    left: -25px;
+    top: 10px;
+}
+
+/* Domba kanan */
+.sheep-right {
+    position: absolute;
+    bottom: 60px;
+    right: 100px;
+}
+
+.sheep-right .body {
+    width: 70px;
+    height: 45px;
+    background: #eee;
+    border-radius: 50px;
+}
+
+.sheep-right .head {
+    width: 30px;
+    height: 30px;
+    background: #222;
+    border-radius: 50%;
+    position: absolute;
+    left: -20px;
+    top: 8px;
+}
+
+/* Container UI */
+.container {
+    backdrop-filter: blur(20px);
+    background: rgba(255,255,255,0.15);
+    padding: 50px;
+    border-radius: 25px;
+    box-shadow: 0 0 60px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.3);
+    z-index: 2;
+    text-align: center;
+}
+
+/* Judul */
+h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+/* Arab */
+.arabic {
+    font-size: 1.6em;
+    margin-bottom: 25px;
+    color: #ffd88a;
+}
+
+/* Countdown */
+.countdown {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.box {
+    background: rgba(0,0,0,0.4);
+    padding: 20px;
+    border-radius: 15px;
+    min-width: 90px;
+}
+
+.number {
+    font-size: 2.3em;
+    font-weight: bold;
+}
+
+.label {
+    font-size: 0.85em;
+    opacity: 0.8;
+}
+
+/* Footer */
+footer {
+    margin-top: 20px;
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sun"></div>
+<div class="hill2"></div>
+<div class="hill"></div>
+
+<div class="sheep-left">
+    <div class="body"></div>
+    <div class="head"></div>
+</div>
+
+<div class="sheep-right">
+    <div class="body"></div>
+    <div class="head"></div>
+</div>
+
+<div class="container">
+    <h1>Idul Adha 🐐</h1>
+    <div class="arabic">عيد الأضحى</div>
+
+    <div class="countdown">
+        <div class="box">
+            <div id="days" class="number">0</div>
+            <div class="label">Hari</div>
+        </div>
+        <div class="box">
+            <div id="hours" class="number">0</div>
+            <div class="label">Jam</div>
+        </div>
+        <div class="box">
+            <div id="minutes" class="number">0</div>
+            <div class="label">Menit</div>
+        </div>
+        <div class="box">
+            <div id="seconds" class="number">0</div>
+            <div class="label">Detik</div>
+        </div>
+    </div>
+
+    <footer>Menuju Hari Raya 🌙</footer>
+</div>
+
+<script>
+const targetDate = new Date("May 27, 2026 00:00:00").getTime();
+
+function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    if (distance < 0) {
+        document.body.innerHTML = "<h1>Selamat Idul Adha 🐐✨</h1>";
+        return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((distance / (1000 * 60)) % 60);
+    const seconds = Math.floor((distance / 1000) % 60);
+
+    document.getElementById("days").innerText = days;
+    document.getElementById("hours").innerText = hours;
+    document.getElementById("minutes").innerText = minutes;
+    document.getElementById("seconds").innerText = seconds;
+}
+
+setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
