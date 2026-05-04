@@ -1,236 +1,154 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>Idul Adha Countdown</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Idul Adha 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
 
-<style>
-body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Segoe UI', sans-serif;
-    color: white;
-    overflow: hidden;
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Menggunakan gambar pemandangan serupa dengan image.jpg */
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('https://images.unsplash.com/photo-1505934333218-802c460f7034?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            overflow: hidden;
+        }
 
-    /* Sunset gradient */
-    background: linear-gradient(
-        to top,
-        #1e2a38 0%,
-        #3a4a5f 30%,
-        #ffb36b 70%,
-        #ffd9a0 100%
-    );
-}
+        .main-card {
+            background: rgba(44, 62, 80, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 50px 40px;
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
 
-/* Matahari */
-.sun {
-    position: absolute;
-    bottom: 120px;
-    left: 15%;
-    width: 120px;
-    height: 120px;
-    background: radial-gradient(circle, #fff2c7, #ffb36b);
-    border-radius: 50%;
-    filter: blur(2px);
-}
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            margin: 0;
+            letter-spacing: 2px;
+        }
 
-/* Bukit */
-.hill {
-    position: absolute;
-    bottom: 0;
-    width: 120%;
-    height: 250px;
-    background: #1b2b3a;
-    border-top-left-radius: 60% 100%;
-    border-top-right-radius: 60% 100%;
-}
+        .arabic-text {
+            color: var(--gold);
+            font-size: 2rem;
+            margin: 10px 0 30px 0;
+            font-weight: 300;
+        }
 
-/* Bukit kedua */
-.hill2 {
-    position: absolute;
-    bottom: 80px;
-    width: 120%;
-    height: 200px;
-    background: #24394d;
-    border-top-left-radius: 60% 100%;
-    border-top-right-radius: 60% 100%;
-}
+        .divider {
+            height: 1px;
+            width: 60%;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 0 auto 30px;
+        }
 
-/* Domba kiri */
-.sheep-left {
-    position: absolute;
-    bottom: 60px;
-    left: 80px;
-}
+        #countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
 
-.sheep-left .body {
-    width: 90px;
-    height: 55px;
-    background: #fff;
-    border-radius: 50px;
-}
+        .box {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px 10px;
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+        }
 
-.sheep-left .head {
-    width: 35px;
-    height: 35px;
-    background: #333;
-    border-radius: 50%;
-    position: absolute;
-    left: -25px;
-    top: 10px;
-}
+        .number {
+            display: block;
+            font-size: 2.2rem;
+            font-weight: 600;
+        }
 
-/* Domba kanan */
-.sheep-right {
-    position: absolute;
-    bottom: 60px;
-    right: 100px;
-}
+        .label {
+            font-size: 0.8rem;
+            color: #ccc;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-.sheep-right .body {
-    width: 70px;
-    height: 45px;
-    background: #eee;
-    border-radius: 50px;
-}
-
-.sheep-right .head {
-    width: 30px;
-    height: 30px;
-    background: #222;
-    border-radius: 50%;
-    position: absolute;
-    left: -20px;
-    top: 8px;
-}
-
-/* Container UI */
-.container {
-    backdrop-filter: blur(20px);
-    background: rgba(255,255,255,0.15);
-    padding: 50px;
-    border-radius: 25px;
-    box-shadow: 0 0 60px rgba(0,0,0,0.5);
-    border: 1px solid rgba(255,255,255,0.3);
-    z-index: 2;
-    text-align: center;
-}
-
-/* Judul */
-h1 {
-    font-size: 3em;
-    margin-bottom: 10px;
-}
-
-/* Arab */
-.arabic {
-    font-size: 1.6em;
-    margin-bottom: 25px;
-    color: #ffd88a;
-}
-
-/* Countdown */
-.countdown {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-}
-
-.box {
-    background: rgba(0,0,0,0.4);
-    padding: 20px;
-    border-radius: 15px;
-    min-width: 90px;
-}
-
-.number {
-    font-size: 2.3em;
-    font-weight: bold;
-}
-
-.label {
-    font-size: 0.85em;
-    opacity: 0.8;
-}
-
-/* Footer */
-footer {
-    margin-top: 20px;
-    font-size: 0.9em;
-    opacity: 0.9;
-}
-</style>
+        .footer-text {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: var(--gold);
+            letter-spacing: 1px;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="sun"></div>
-<div class="hill2"></div>
-<div class="hill"></div>
+<div class="main-card">
+    <h1>Idul Adha</h1>
+    <div class="arabic-text">عيد الأضحى</div>
+    <div class="divider"></div>
 
-<div class="sheep-left">
-    <div class="body"></div>
-    <div class="head"></div>
-</div>
-
-<div class="sheep-right">
-    <div class="body"></div>
-    <div class="head"></div>
-</div>
-
-<div class="container">
-    <h1>Idul Adha 🐐</h1>
-    <div class="arabic">عيد الأضحى</div>
-
-    <div class="countdown">
+    <div id="countdown">
         <div class="box">
-            <div id="days" class="number">0</div>
-            <div class="label">Hari</div>
+            <span class="number" id="days">00</span>
+            <span class="label">Hari</span>
         </div>
         <div class="box">
-            <div id="hours" class="number">0</div>
-            <div class="label">Jam</div>
+            <span class="number" id="hours">00</span>
+            <span class="label">Jam</span>
         </div>
         <div class="box">
-            <div id="minutes" class="number">0</div>
-            <div class="label">Menit</div>
+            <span class="number" id="minutes">00</span>
+            <span class="label">Menit</span>
         </div>
         <div class="box">
-            <div id="seconds" class="number">0</div>
-            <div class="label">Detik</div>
+            <span class="number" id="seconds">00</span>
+            <span class="label">Detik</span>
         </div>
     </div>
 
-    <footer>Menuju Hari Raya 🌙</footer>
+    <div class="footer-text">Menuju Hari Raya Idul Adha 🌙</div>
 </div>
 
 <script>
-const targetDate = new Date("May 27, 2026 00:00:00").getTime();
+    // Target: 27 Mei 2026 (Perkiraan Idul Adha 1447 H)
+    const targetDate = new Date("May 27, 2026 00:00:00").getTime();
 
-function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = targetDate - now;
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
 
-    if (distance < 0) {
-        document.body.innerHTML = "<h1>Selamat Idul Adha 🐐✨</h1>";
-        return;
+        if (diff < 0) {
+            document.querySelector(".main-card").innerHTML = "<h1>Selamat Idul Adha!</h1>";
+            return;
+        }
+
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerText = d.toString().padStart(2, '0');
+        document.getElementById("hours").innerText = h.toString().padStart(2, '0');
+        document.getElementById("minutes").innerText = m.toString().padStart(2, '0');
+        document.getElementById("seconds").innerText = s.toString().padStart(2, '0');
     }
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((distance / (1000 * 60)) % 60);
-    const seconds = Math.floor((distance / 1000) % 60);
-
-    document.getElementById("days").innerText = days;
-    document.getElementById("hours").innerText = hours;
-    document.getElementById("minutes").innerText = minutes;
-    document.getElementById("seconds").innerText = seconds;
-}
-
-setInterval(updateCountdown, 1000);
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
 </script>
 
 </body>
